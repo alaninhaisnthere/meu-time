@@ -59,7 +59,7 @@ export default function SeasonsPage({ isLoggedIn }: { isLoggedIn: boolean }) {
           </div>
         </div>
       ) : (
-        <p>Faça o login para acessar as informações de temporadas.</p>
+        <p>Faça o login para acessar esta página.</p>
       )}
     </div>
   );
