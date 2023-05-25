@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 interface League {
-  year: string;
+  name: string;
   league_id: string;
 }
 
@@ -15,15 +15,15 @@ export default function LeaguesPage({ isLoggedIn }: { isLoggedIn: boolean }) {
           data: {
             response: [
               {
-                year: '2018',
+                name: 'league 1',
                 league_id: '1',
               },
               {
-                year: '2019',
+                name: 'league 2',
                 league_id: '2',
               },
               {
-                year: '2020',
+                name: 'league 3',
                 league_id: '3',
               },
             ],
@@ -53,7 +53,7 @@ export default function LeaguesPage({ isLoggedIn }: { isLoggedIn: boolean }) {
             <h2 className="text-xl font-bold mb-2">Lista de ligas:</h2>
             <ul>
               {leagues.map((league) => (
-                <li key={league.league_id}>{league.year}</li>
+                <li key={league.league_id}>{league.name}</li>
               ))}
             </ul>
           </div>
