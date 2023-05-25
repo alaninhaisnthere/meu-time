@@ -20,7 +20,7 @@ export default function Home() {
     const fetchCountries = async () => {
       try {
         const response = await axios.get(
-          `http://api-football.com/v3/countries`,
+          `https://v3.football.api-sports.io/countries`,
           {
             headers: {
               'x-rapidapi-host': 'api-football-v1.p.rapidapi.com',
@@ -37,7 +37,7 @@ export default function Home() {
     const fetchSeasons = async (countryId: number) => {
       try {
         const response = await axios.get(
-          `http://api-football.com/v3/leagues/seasons/${countryId}`,
+          `https://v3.football.api-sports.io/leagues/seasons/${countryId}`,
           {
             headers: {
               'x-rapidapi-host': 'api-football-v1.p.rapidapi.com',
