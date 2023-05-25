@@ -1,27 +1,24 @@
 import { useState, useEffect } from 'react';
-// import axios from 'axios';
 
 interface Country {
   name: string;
   country_id: string;
 }
 
-// interface Season {
-//   year: string;
-//   season_id: number;
-// }
+interface Season {
+  year: string;
+  season_id: string;
+}
 
-// interface League {
-//   league: {
-//     name: string;
-//     league_id: string;
-//   }
-// }
+interface League {
+  year: string;
+  league_id: string;
+}
 
 export default function Home() {
-  const [countries] = useState<Country[]>([]);
-  // const [seasons, setSeasons] = useState<Season[]>([]);
-  // const [leagues, setLeagues] = useState<League[]>([]);
+  const [countries, setCountries] = useState<Country[]>([]);
+  const [seasons, setSeasons] = useState<Season[]>([]);
+  const [leagues, setLeagues] = useState<League[]>([]);
 
   useEffect(() => {
     const fetchCountries = async () => {
@@ -50,47 +47,74 @@ export default function Home() {
         };
         await new Promise(resolve => setTimeout(resolve, 1000));
         const countries: Country[] = response.data.response;
+        setCountries(countries);
         console.log(countries);
       } catch (error) {
         console.error(error);
       }
     };
 
-    // const fetchSeasons = async () => {
-    //   try {
-    //     const response = await axios.get(
-    //       `https://v3.football.api-sports.io/leagues/seasons`,
-    //       {
-    //         headers: {
-    //           'x-rapidapi-host': 'v3.football.api-sports.io',
-    //           'x-apisports-key': 'f369337349f82b04406e5b1ec2576022'
-    //         },
-    //       }
-    //     );
-    //     setSeasons(response.data.response);
-    //   } catch (error) {
-    //     console.error(error);
-    //   }
-    // };
+    const fetchSeasons = async () => {
+      try {
+        const response = {
+          data: {
+            response: [
+              {
+                year: '2021',
+                season_id: '1',
+              },
+              {
+                year: '2022',
+                season_id: '2',
+              },
+              {
+                year: '2023',
+                season_id: '3',
+              },
+            ],
+          },
+        };
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        const seasons: Season[] = response.data.response;
+        setSeasons(seasons);
+        console.log(seasons);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-    // const fetchLeagues = async () => {
-    //   try {
-    //     const response = await axios.get(
-    //       `https://v3.football.api-sports.io/leagues`,
-    //       {
-    //         headers: {
-    //           'x-rapidapi-host': 'v3.football.api-sports.io',
-    //           'x-rapidapi-key': 'f369337349f82b04406e5b1ec2576022'
-    //         },
-    //       }
-    //     );
-    //     setLeagues(response.data.response);
-    //   } catch (error) {
-    //     console.error(error);
-    //   }
-    // };
+    const fetchLeagues = async () => {
+      try {
+        const response = {
+          data: {
+            response: [
+              {
+                year: '2018',
+                league_id: '1',
+              },
+              {
+                year: '2019',
+                league_id: '2',
+              },
+              {
+                year: '2020',
+                league_id: '3',
+              },
+            ],
+          },
+        };
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        const leagues: League[] = response.data.response;
+        setLeagues(leagues);
+        console.log(leagues);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
     fetchCountries();
+    fetchSeasons();
+    fetchLeagues();
   }, []);
 
   return (
@@ -106,7 +130,7 @@ export default function Home() {
         </ul>
       </div>
 
-      {/* <div className="mb-4">
+      <div className="mb-4">
         <h2 className="text-xl font-bold mb-2">Temporadas:</h2>
         <ul>
           {seasons.map((season) => (
@@ -119,10 +143,10 @@ export default function Home() {
         <h2 className="text-xl font-bold mb-2">Ligas:</h2>
         <ul>
           {leagues.map((league) => (
-            <li key={league.league.league_id}>{league.league.name}</li>
+            <li key={league.league_id}>{league.year}</li>
           ))}
         </ul>
-      </div> */}
+      </div>
     </div>
   );
 }
