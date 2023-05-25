@@ -5,7 +5,7 @@ interface Season {
   season_id: string;
 }
 
-export default function SeasonsPage() {
+export default function SeasonsPage({ isLoggedIn }: { isLoggedIn: boolean }) {
   const [seasons, setSeasons] = useState<Season[]>([]);
 
   useEffect(() => {
@@ -38,21 +38,29 @@ export default function SeasonsPage() {
       }
     };
 
-    fetchSeasons();
-  }, []);
+    if (isLoggedIn) {
+      fetchSeasons();
+    }
+  }, [isLoggedIn]);
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">Temporadas</h1>
+      {isLoggedIn ? (
+        <div>
+          <h1 className="text-3xl font-bold mb-4">Temporadas</h1>
 
-      <div className="mb-4">
-        <h2 className="text-xl font-bold mb-2">Lista de temporadas:</h2>
-        <ul>
-          {seasons.map((season) => (
-            <li key={season.season_id}>{season.year}</li>
-          ))}
-        </ul>
-      </div>
+          <div className="mb-4">
+            <h2 className="text-xl font-bold mb-2">Lista de temporadas:</h2>
+            <ul>
+              {seasons.map((season) => (
+                <li key={season.season_id}>{season.year}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      ) : (
+        <p>Faça o login para acessar as informações de temporadas.</p>
+      )}
     </div>
   );
 }

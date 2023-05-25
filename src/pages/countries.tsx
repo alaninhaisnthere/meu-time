@@ -5,7 +5,7 @@ interface Country {
   country_id: string;
 }
 
-export default function CountriesPage() {
+export default function CountriesPage({ isLoggedIn }: { isLoggedIn: boolean }) {
   const [countries, setCountries] = useState<Country[]>([]);
 
   useEffect(() => {
@@ -42,21 +42,29 @@ export default function CountriesPage() {
       }
     };
 
-    fetchCountries();
-  }, []);
+    if (isLoggedIn) {
+      fetchCountries();
+    }
+  }, [isLoggedIn]);
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">Países</h1>
+      {isLoggedIn ? (
+        <div>
+          <h1 className="text-3xl font-bold mb-4">Países</h1>
 
-      <div className="mb-4">
-        <h2 className="text-xl font-bold mb-2">Lista de países:</h2>
-        <ul>
-          {countries.map((country) => (
-            <li key={country.country_id}>{country.name}</li>
-          ))}
-        </ul>
-      </div>
+          <div className="mb-4">
+            <h2 className="text-xl font-bold mb-2">Lista de países:</h2>
+            <ul>
+              {countries.map((country) => (
+                <li key={country.country_id}>{country.name}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      ) : (
+        <p>Faça o login para acessar as informações de países.</p>
+      )}
     </div>
   );
 }

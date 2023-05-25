@@ -5,7 +5,7 @@ interface League {
   league_id: string;
 }
 
-export default function LeaguesPage() {
+export default function LeaguesPage({ isLoggedIn }: { isLoggedIn: boolean }) {
   const [leagues, setLeagues] = useState<League[]>([]);
 
   useEffect(() => {
@@ -38,21 +38,29 @@ export default function LeaguesPage() {
       }
     };
 
-    fetchLeagues();
-  }, []);
+    if (isLoggedIn) {
+      fetchLeagues();
+    }
+  }, [isLoggedIn]);
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">Ligas</h1>
+      {isLoggedIn ? (
+        <div>
+          <h1 className="text-3xl font-bold mb-4">Ligas</h1>
 
-      <div className="mb-4">
-        <h2 className="text-xl font-bold mb-2">Lista de ligas:</h2>
-        <ul>
-          {leagues.map((league) => (
-            <li key={league.league_id}>{league.year}</li>
-          ))}
-        </ul>
-      </div>
+          <div className="mb-4">
+            <h2 className="text-xl font-bold mb-2">Lista de ligas:</h2>
+            <ul>
+              {leagues.map((league) => (
+                <li key={league.league_id}>{league.year}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      ) : (
+        <p>Faça o login para acessar as informações de ligas.</p>
+      )}
     </div>
   );
 }
