@@ -11,11 +11,17 @@ export default function IndexPage() {
   };
 
   const handleSeasonChange = (event: { target: { value: SetStateAction<string>; }; }) => {
-    setSelectedSeason(event.target.value);
+    const selectedValue = event.target.value;
+    if (selectedCountry) {
+      setSelectedSeason(selectedValue);
+    }
   };
 
   const handleLeagueChange = (event: { target: { value: SetStateAction<string>; }; }) => {
-    setSelectedLeague(event.target.value);
+    const selectedValue = event.target.value;
+    if (selectedCountry && selectedSeason) {
+      setSelectedLeague(selectedValue);
+    }
   };
 
   return (
@@ -43,6 +49,7 @@ export default function IndexPage() {
               value={selectedSeason}
               onChange={handleSeasonChange}
               className="border text-white bg-purple-600 rounded px-4 py-1 w-full h-10"
+              disabled={!selectedCountry}
             >
               <option value="">Selecione uma temporada</option>
               <option value="2021">2021</option>
@@ -56,6 +63,7 @@ export default function IndexPage() {
               value={selectedLeague}
               onChange={handleLeagueChange}
               className="border text-white bg-purple-600 rounded px-4 py-1 w-full h-10"
+              disabled={!selectedCountry || !selectedSeason}
             >
               <option value="">Selecione uma liga</option>
               <option value="Liga 1">Liga 1</option>
