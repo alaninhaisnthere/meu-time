@@ -1,33 +1,34 @@
-import { useState } from 'react';
-import { useRouter } from 'next/router';
-import Logoff from '../assets/logoff.svg';
 import Image from 'next/image';
+import Link from 'next/link';
+import Logoff from '../assets/logoff.svg';
 
 interface HeaderProps {
+  isLoggedIn: boolean;
   onLogout: () => void;
 }
 
-export default function Header({ onLogout }: HeaderProps) {
-  const router = useRouter();
-
-  const handleLogout = () => {
-    localStorage.removeItem('apiKey');
-    onLogout();
-    router.push('/');
-  };
+const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLogout }) => {
+  if (!isLoggedIn) {
+    return null;
+  }
 
   return (
-    <header className="flex items-center justify-between p-4">
-      <h1 className="text-2xl font-bold">
-        Meu Time
-      </h1>
-      <button onClick={onLogout} className="ml-4">
-        <Image
-          src="/assets/logoff.svg"
-          alt="Logoff"
-          width={20}
-          height={20} />
-      </button>
-    </header>
+    <div>
+      <header className='bg-purple-600 flex justify-between items-center px-4 py-2 px-5'>
+        <div>
+          <Link href="/" className='text-yellow-400 font-bold text-4xl'>
+            Meu Time
+          </Link>
+        </div>
+        <div>
+          <button onClick={onLogout}>
+            <Image src={Logoff} alt="Logout" />
+          </button>
+        </div>
+      </header>
+    </div>
   );
-}
+
+};
+
+export default Header;

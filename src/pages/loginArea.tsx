@@ -11,7 +11,7 @@ export default function LoginPage({ onLogin }: { onLogin: () => void }) {
       localStorage.setItem('apiKey', apiKey);
       onLogin();
     } else {
-      alert("erro de login")
+      alert('Erro de login');
     }
   };
 
@@ -35,7 +35,7 @@ export default function LoginPage({ onLogin }: { onLogin: () => void }) {
                   type='text'
                   value={apiKey}
                   onChange={(e) => setApiKey(e.target.value)}
-                  className='rounded-lg mr-10 py-4 px-14'
+                  className='rounded-lg mr-10 py-4 px-14 focus:outline-none'
                 />
                 <div>
                   <button

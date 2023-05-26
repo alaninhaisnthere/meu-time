@@ -44,7 +44,7 @@ export default function IndexPage() {
               id="country"
               value={selectedCountry}
               onChange={handleCountryChange}
-              className="border text-white bg-purple-600 rounded px-4 py-1 w-full h-10"
+              className="border text-white bg-purple-600 rounded px-4 py-1 w-full h-10 focus:outline-none"
             >
               <option value="">Selecione um país</option>
               <option value="Country 1">Country 1</option>
@@ -58,7 +58,7 @@ export default function IndexPage() {
               id="season"
               value={selectedSeason}
               onChange={handleSeasonChange}
-              className="border text-white bg-purple-600 rounded px-4 py-1 w-full h-10"
+              className="border text-white bg-purple-600 rounded px-4 py-1 w-full h-10 focus:outline-none"
               disabled={!selectedCountry}
             >
               <option value="">Selecione uma temporada</option>
@@ -72,7 +72,7 @@ export default function IndexPage() {
               id="league"
               value={selectedLeague}
               onChange={handleLeagueChange}
-              className="border text-white bg-purple-600 rounded px-4 py-1 w-full h-10"
+              className="border text-white bg-purple-600 rounded px-4 py-1 w-full h-10 focus:outline-none"
               disabled={!selectedCountry || !selectedSeason}
             >
               <option value="">Selecione uma liga</option>

@@ -1,9 +1,11 @@
-import '../styles/styles.css'
+import '../styles/styles.css';
 
 import { useState, useEffect } from 'react';
 import { AppProps } from 'next/app';
-import LoginPage from './login';
 import { useRouter } from 'next/router';
+
+import Header from '@/components/header';
+import LoginPage from './loginArea';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -28,17 +30,14 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <div>
+      <Header isLoggedIn={isLoggedIn} onLogout={handleLogout} />
       {!isLoggedIn ? (
         <LoginPage onLogin={() => handleLogin()} />
       ) : (
-        <div>
-          <Component {...pageProps} isLoggedIn={isLoggedIn} />
-          <button onClick={handleLogout}>
-            Logout
-          </button>
-        </div>
+        <Component {...pageProps} isLoggedIn={isLoggedIn} />
       )}
     </div>
   );
 }
+
 export default MyApp;
