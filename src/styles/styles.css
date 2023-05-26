@@ -4,6 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  @apply bg-login;
+.bg-login-page {
+  background-image: theme("backgroundImage.login");
 }

@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 
-import Player from '../assets/player.svg'
-
+import Player from '../assets/player.svg';
 
 export default function LoginPage({ onLogin }: { onLogin: () => void }) {
   const [apiKey, setApiKey] = useState('');
@@ -12,6 +11,7 @@ export default function LoginPage({ onLogin }: { onLogin: () => void }) {
       localStorage.setItem('apiKey', apiKey);
       onLogin();
     } else {
+      alert("erro de login")
     }
   };
 
@@ -19,10 +19,7 @@ export default function LoginPage({ onLogin }: { onLogin: () => void }) {
     <div className='bg-login'>
       <div className='flex items-center justify-evenly font-mulish'>
         <div className='flex justify-center items-center h-screen'>
-          <Image
-            src={Player}
-            alt='player'
-            className='' />
+          <Image src={Player} alt='player' className='' />
         </div>
         <div className=''>
           <h1 className='font-black text-9xl text-yellow-400 mb-10'>
@@ -34,9 +31,17 @@ export default function LoginPage({ onLogin }: { onLogin: () => void }) {
                 Chave de acesso:
               </h2>
               <div className='flex flex-row'>
-                <input type="text" value={apiKey} onChange={(e) => setApiKey(e.target.value)} className='rounded-lg mr-10 py-4 px-14' />
+                <input
+                  type='text'
+                  value={apiKey}
+                  onChange={(e) => setApiKey(e.target.value)}
+                  className='rounded-lg mr-10 py-4 px-14'
+                />
                 <div>
-                  <button className='bg-yellow-400 text-black font-bold text-2xl py-4 px-8 rounded-lg' onClick={handleLogin}>
+                  <button
+                    className='bg-yellow-400 text-black font-bold text-2xl py-4 px-8 rounded-lg'
+                    onClick={handleLogin}
+                  >
                     Entrar
                   </button>
                 </div>

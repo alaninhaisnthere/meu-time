@@ -5,7 +5,6 @@ import { AppProps } from 'next/app';
 import LoginPage from './login';
 import { useRouter } from 'next/router';
 
-
 function MyApp({ Component, pageProps }: AppProps) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const router = useRouter();
@@ -30,15 +29,16 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <div>
       {!isLoggedIn ? (
-        <LoginPage onLogin={handleLogin} />
+        <LoginPage onLogin={() => handleLogin()} />
       ) : (
         <div>
           <Component {...pageProps} isLoggedIn={isLoggedIn} />
-          <button onClick={handleLogout}>Logout</button>
+          <button onClick={handleLogout}>
+            Logout
+          </button>
         </div>
       )}
     </div>
   );
 }
-
 export default MyApp;

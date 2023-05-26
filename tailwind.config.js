@@ -51,5 +51,10 @@ module.exports = {
       backgroundOpacity: (theme) => theme("opacity"),
     },
   },
+  variants: {
+    extend: {
+      backgroundImage: ["responsive", "hover", "focus", "bg-login-page"],
+    },
+  },
   plugins: [],
 };
