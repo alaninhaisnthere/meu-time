@@ -1,6 +1,8 @@
 import axios from 'axios';
 
 export interface League {
+  teams: any;
+  id: string | number | readonly string[] | undefined;
   name: string;
   country: string;
 }
@@ -18,7 +20,7 @@ export const fetchLeaguesByCountryAndSeason = async (country: string, season: st
 
     const leagues: League[] = response.data.response.map((item: any) => ({
       name: item.league.name,
-      country: item.country.name,
+      country: item.country.name
     }));
 
     return leagues;
