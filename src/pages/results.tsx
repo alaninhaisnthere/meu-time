@@ -5,7 +5,7 @@ import { useGraphics } from '../utils/useGraphics';
 
 export default function ResultsPage() {
   const router = useRouter();
-  const { country, season, league } = router.query;
+  const { country, league, season } = router.query;
   const players = usePlayers();
   const formations = useFormation();
   const graphicsData = useGraphics();
@@ -16,11 +16,11 @@ export default function ResultsPage() {
         <div className="flex flex-col items-center">
           <h1 className="text-4xl font-bold mb-4">Resultados</h1>
           <div className="container p-5 rounded-lg bg-purple-600 items-center mt-4 text-white text-xl w-auto">
-            {country && season && league && (
+            {country && league && season && (
               <div className="font-bold space-y-4">
                 <p>País: {country}</p>
-                <p>Liga: {league}</p>
                 <p>Temporada: {season}</p>
+                <p>liga: {league}</p>
               </div>
             )}
           </div>

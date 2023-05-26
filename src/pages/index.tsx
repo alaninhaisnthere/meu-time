@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { SetStateAction, useState, useEffect } from 'react';
 import { fetchCountries, Country } from '../utils/api-countries';
-import { fetchLeague, League } from '@/utils/api-leagues';
+import { fetchLeaguesByCountryAndSeason, League } from '@/utils/api-leagues';
 import { fetchSeasons, Season } from '@/utils/api-seasons';
 
 export default function IndexPage() {
@@ -25,15 +25,6 @@ export default function IndexPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const fetchedLeagues = await fetchLeague();
-      setLeagues(fetchedLeagues);
-    };
-
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
       const fetchedSeasons = await fetchSeasons();
       setSeasons(fetchedSeasons);
     };
@@ -47,16 +38,23 @@ export default function IndexPage() {
 
   const handleSeasonChange = (event: { target: { value: SetStateAction<string> } }) => {
     const selectedValue = event.target.value;
-    if (selectedCountry) {
-      setSelectedSeason(selectedValue);
-    }
+    setSelectedSeason(selectedValue);
   };
+
+  useEffect(() => {
+    if (selectedCountry && selectedSeason) {
+      const fetchData = async () => {
+        const fetchedLeagues = await fetchLeaguesByCountryAndSeason(selectedCountry, selectedSeason);
+        setLeagues(fetchedLeagues);
+      };
+
+      fetchData();
+    }
+  }, [selectedCountry, selectedSeason]);
 
   const handleLeagueChange = (event: { target: { value: SetStateAction<string> } }) => {
     const selectedValue = event.target.value;
-    if (selectedCountry && selectedSeason) {
-      setSelectedLeague(selectedValue);
-    }
+    setSelectedLeague(selectedValue);
   };
 
   const isSearchDisabled = !selectedCountry || !selectedSeason || !selectedLeague;
@@ -95,10 +93,10 @@ export default function IndexPage() {
               className="border text-white bg-purple-600 rounded px-4 py-1 w-full h-10 focus:outline-none"
               disabled={!selectedCountry}
             >
-              <option value="">Selecione uma liga</option>
-              {leagues.map((league) => (
-                <option value={league.name} key={league.name}>
-                  {league.name}
+              <option value="">Selecione uma temporada</option>
+              {seasons.map((season) => (
+                <option value={season.response} key={season.response}>
+                  {season.response}
                 </option>
               ))}
             </select>
@@ -112,9 +110,9 @@ export default function IndexPage() {
               disabled={!selectedCountry || !selectedSeason}
             >
               <option value="">Selecione uma liga</option>
-              {seasons.map((season) => (
-                <option value={season.response} key={season.response}>
-                  {season.response}
+              {leagues.map((league) => (
+                <option value={league.name} key={league.name}>
+                  {league.name}
                 </option>
               ))}
             </select>
