@@ -1,25 +1,58 @@
 import { useRouter } from 'next/router';
-import { SetStateAction, useState } from 'react';
+import { SetStateAction, useState, useEffect } from 'react';
+import { fetchCountries, Country } from '../utils/api-countries';
+import { fetchLeague, League } from '@/utils/api-leagues';
+import { fetchSeasons, Season } from '@/utils/api-seasons';
 
 export default function IndexPage() {
   const [selectedCountry, setSelectedCountry] = useState('');
   const [selectedSeason, setSelectedSeason] = useState('');
   const [selectedLeague, setSelectedLeague] = useState('');
+  const [countries, setCountries] = useState<Country[]>([]);
+  const [leagues, setLeagues] = useState<League[]>([]); // Corrigido: utilizar o tipo League[]
+  const [seasons, setSeasons] = useState<Season[]>([]);
 
   const router = useRouter();
 
-  const handleCountryChange = (event: { target: { value: SetStateAction<string>; }; }) => {
+  useEffect(() => {
+    const fetchData = async () => {
+      const fetchedCountries = await fetchCountries();
+      setCountries(fetchedCountries);
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const fetchedLeagues = await fetchLeague();
+      setLeagues(fetchedLeagues);
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const fetchedSeasons = await fetchSeasons();
+      setSeasons(fetchedSeasons);
+    };
+
+    fetchData();
+  }, []);
+
+  const handleCountryChange = (event: { target: { value: SetStateAction<string> } }) => {
     setSelectedCountry(event.target.value);
   };
 
-  const handleSeasonChange = (event: { target: { value: SetStateAction<string>; }; }) => {
+  const handleSeasonChange = (event: { target: { value: SetStateAction<string> } }) => {
     const selectedValue = event.target.value;
     if (selectedCountry) {
       setSelectedSeason(selectedValue);
     }
   };
 
-  const handleLeagueChange = (event: { target: { value: SetStateAction<string>; }; }) => {
+  const handleLeagueChange = (event: { target: { value: SetStateAction<string> } }) => {
     const selectedValue = event.target.value;
     if (selectedCountry && selectedSeason) {
       setSelectedLeague(selectedValue);
@@ -47,10 +80,11 @@ export default function IndexPage() {
               className="border text-white bg-purple-600 rounded px-4 py-1 w-full h-10 focus:outline-none"
             >
               <option value="">Selecione um país</option>
-              <option value="Country 1">Country 1</option>
-              <option value="Country 2">Country 2</option>
-              <option value="Country 3">Country 3</option>
-              <option value="Country 4">Country 4</option>
+              {countries.map((country) => (
+                <option value={country.name} key={country.code}>
+                  {country.name}
+                </option>
+              ))}
             </select>
           </div>
           <div className="flex mb-2 text-2xl font-bold">
@@ -61,10 +95,12 @@ export default function IndexPage() {
               className="border text-white bg-purple-600 rounded px-4 py-1 w-full h-10 focus:outline-none"
               disabled={!selectedCountry}
             >
-              <option value="">Selecione uma temporada</option>
-              <option value="2021">2021</option>
-              <option value="2022">2022</option>
-              <option value="2023">2023</option>
+              <option value="">Selecione uma temporada</option> {/* Corrigido: alterar o texto da opção */}
+              {leagues.map((league) => (
+                <option value={league.name} key={league.type}>
+                  {league.name}
+                </option>
+              ))}
             </select>
           </div>
           <div className="flex mb-4 text-2xl font-bold">
@@ -72,13 +108,15 @@ export default function IndexPage() {
               id="league"
               value={selectedLeague}
               onChange={handleLeagueChange}
-              className="border text-white bg-purple-600 rounded px-4 py-1 w-full h-10 focus:outline-none"
+              className="border text-white bg-purple-600 rounded px-4 py-1 w-full h-10 "
               disabled={!selectedCountry || !selectedSeason}
             >
               <option value="">Selecione uma liga</option>
-              <option value="Liga 1">Liga 1</option>
-              <option value="Liga 2">Liga 2</option>
-              <option value="Liga 3">Liga 3</option>
+              {seasons.map((season) => (
+                <option value={season.response} key={season.response}>
+                  {season.response}
+                </option>
+              ))}
             </select>
           </div>
         </div>
