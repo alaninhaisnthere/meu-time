@@ -2,7 +2,6 @@ import { useState } from 'react';
 import Image from 'next/image';
 
 import Player from '../assets/player.svg'
-import Field from '../assets/campo.svg'
 
 
 export default function LoginPage({ onLogin }: { onLogin: () => void }) {
@@ -18,27 +17,30 @@ export default function LoginPage({ onLogin }: { onLogin: () => void }) {
 
   return (
     <div className='bg-login'>
-      <div className='flex items-center font-mulish'>
-        <div className='items-center'>
+      <div className='flex items-center justify-evenly font-mulish'>
+        <div className='flex justify-center items-center h-screen'>
           <Image
             src={Player}
             alt='player'
             className='' />
-          <Image
-            src={Field}
-            alt='field'
-            className='' />
         </div>
         <div className=''>
-          <h1 className='font-black text-8xl text-yellow-400'>
+          <h1 className='font-black text-9xl text-yellow-400 mb-10'>
             Meu Time
           </h1>
-          <div className='flex flex-col space-y-4'>
-            <input type="text" value={apiKey} onChange={(e) => setApiKey(e.target.value)} className='' />
+          <div className='flex justify-center'>
             <div>
-              <button className='bg-yellow-400 text-black font-bold text-2xl py-4 px-8 rounded-lg' onClick={handleLogin}>
-                Entrar
-              </button>
+              <h2 className='flex justify-start font-bold text-white mb-2 text-xl'>
+                Chave de acesso:
+              </h2>
+              <div className='flex flex-row'>
+                <input type="text" value={apiKey} onChange={(e) => setApiKey(e.target.value)} className='rounded-lg mr-10 py-4 px-14' />
+                <div>
+                  <button className='bg-yellow-400 text-black font-bold text-2xl py-4 px-8 rounded-lg' onClick={handleLogin}>
+                    Entrar
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

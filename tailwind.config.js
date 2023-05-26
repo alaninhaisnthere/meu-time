@@ -10,7 +10,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        mulish: ['"Mulish"', ...defaultTheme.fontFamily.sans],
+        mulish: ["Mulish", ...defaultTheme.fontFamily.sans],
       },
       fontWeight: {
         hairline: "100",
