@@ -35,7 +35,8 @@ export default function LoginPage({ onLogin }: { onLogin: () => void }) {
                   type='text'
                   value={apiKey}
                   onChange={(e) => setApiKey(e.target.value)}
-                  className='rounded-lg mr-10 py-4 px-14 focus:outline-none'
+                  placeholder='Insira aqui a API key'
+                  className='rounded-lg mr-10 py-4 px-10 focus:outline-noneplaceholder:text-slate-400'
                 />
                 <div>
                   <button

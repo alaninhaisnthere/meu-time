@@ -12,6 +12,13 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLogout }) => {
     return null;
   }
 
+  const handleLogout = () => {
+    const confirmLogout = window.confirm('Deseja sair?');
+    if (confirmLogout) {
+      onLogout();
+    }
+  };
+
   return (
     <div>
       <header className='bg-purple-600 flex justify-between items-center px-4 py-2 px-5'>
@@ -21,14 +28,13 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLogout }) => {
           </Link>
         </div>
         <div>
-          <button onClick={onLogout}>
+          <button onClick={handleLogout}>
             <Image src={Logoff} alt="Logout" />
           </button>
         </div>
       </header>
     </div>
   );
-
 };
 
 export default Header;
