@@ -78,16 +78,62 @@ export default function IndexPage() {
       router.push(`/results?country=${selectedCountry}&season=${selectedSeason}&league=${selectedLeague}`);
     }
   };
-
   return (
     <>
       <div className="flex flex-col items-center justify-center min-h-screen font-mulish">
         <h1 className="text-6xl font-bold mb-5">Nova Pesquisa</h1>
         <div className="space-y-4">
-          {/* ... */}
-        </div>
 
-        {/* ... */}
+          <div className="flex mb-2 text-2xl font-bold">
+            <select
+              id="country"
+              value={selectedCountry}
+              onChange={handleCountryChange}
+              className="border text-white bg-purple-600 rounded px-4 py-1 w-full h-10 focus:outline-none"
+            >
+              <option value="">Selecione um país</option>
+              {countries.map((country) => (
+                <option value={country.name} key={country.code}>
+                  {country.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="flex mb-2 text-2xl font-bold">
+            <select
+              id="season"
+              value={selectedSeason}
+              onChange={handleSeasonChange}
+              className="border text-white bg-purple-600 rounded px-4 py-1 w-full h-10 focus:outline-none"
+              disabled={!selectedCountry}
+            >
+              <option value="">Selecione uma temporada</option>
+              {seasons.map((season) => (
+                <option value={season.response} key={season.response}>
+                  {season.response}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="flex mb-4 text-2xl font-bold">
+            <select
+              id="league"
+              value={selectedLeague}
+              onChange={handleLeagueChange}
+              className="border text-white bg-purple-600 rounded px-4 py-1 w-full h-10 "
+              disabled={!selectedCountry || !selectedSeason}
+            >
+              <option value="">Selecione uma liga</option>
+              {leagues.map((league) => (
+                <option value={league.name} key={league.name}>
+                  {league.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
 
         {teams.length > 0 && (
           <div className="mt-8">
@@ -98,6 +144,23 @@ export default function IndexPage() {
               ))}
             </ul>
           </div>
+        )}
+
+
+        {selectedCountry && selectedSeason && selectedLeague ? (
+          <button
+            onClick={handleSearch}
+            className="bg-yellow-400 text-black text-xl font-bold py-2 px-4 rounded mt-4"
+          >
+            Pesquisar
+          </button>
+        ) : (
+          <button
+            className="bg-yellow-400 text-black text-xl font-bold py-2 px-4 rounded mt-4 opacity-50 cursor-not-allowed"
+            disabled
+          >
+            Pesquisar
+          </button>
         )}
       </div>
     </>
