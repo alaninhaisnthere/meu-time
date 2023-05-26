@@ -1,10 +1,12 @@
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { SetStateAction, useState } from 'react';
 
 export default function IndexPage() {
   const [selectedCountry, setSelectedCountry] = useState('');
   const [selectedSeason, setSelectedSeason] = useState('');
   const [selectedLeague, setSelectedLeague] = useState('');
+
+  const router = useRouter();
 
   const handleCountryChange = (event: { target: { value: SetStateAction<string>; }; }) => {
     setSelectedCountry(event.target.value);
@@ -25,6 +27,12 @@ export default function IndexPage() {
   };
 
   const isSearchDisabled = !selectedCountry || !selectedSeason || !selectedLeague;
+
+  const handleSearch = () => {
+    if (!isSearchDisabled) {
+      router.push(`/results?country=${selectedCountry}&season=${selectedSeason}&league=${selectedLeague}`);
+    }
+  };
 
   return (
     <>
@@ -74,13 +82,21 @@ export default function IndexPage() {
             </select>
           </div>
         </div>
-        <Link
-          href={`/results?country=${selectedCountry}&season=${selectedSeason}&league=${selectedLeague}`}
-          className={`bg-yellow-400 text-black text-xl font-bold py-2 px-4 rounded mt-4 ${isSearchDisabled ? 'opacity-50 cursor-not-allowed' : ''}`}
-          disabled={isSearchDisabled}
-        >
-          Pesquisar
-        </Link>
+        {selectedCountry && selectedSeason && selectedLeague ? (
+          <button
+            onClick={handleSearch}
+            className="bg-yellow-400 text-black text-xl font-bold py-2 px-4 rounded mt-4"
+          >
+            Pesquisar
+          </button>
+        ) : (
+          <button
+            className="bg-yellow-400 text-black text-xl font-bold py-2 px-4 rounded mt-4 opacity-50 cursor-not-allowed"
+            disabled
+          >
+            Pesquisar
+          </button>
+        )}
       </div>
     </>
   );

@@ -5,12 +5,20 @@ export default function ResultsPage() {
   const { country, season, league } = router.query;
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">Resultados</h1>
+    <>
+      <div className="flex flex-col items-center justify-center min-h-auto mt-10 font-mulish">
+        <h1 className="text-4xl font-bold mb-4">Resultados</h1>
+        <div className="container p-4 rounded-lg bg-purple-600 mt-4 text-white text-xl w-auto">
 
-      {country && season && league && (
-        <p>País: {country}, Liga: {league}, Temporada: {season}</p>
-      )}
-    </div>
+          {country && season && league && (
+            <div className='font-bold space-y-4 '>
+              <p> País: {country}</p>
+              <p>Liga: {league}</p>
+              <p>Temporada: {season}</p>
+            </div>
+          )}
+        </div>
+      </div>
+    </>
   );
 }
