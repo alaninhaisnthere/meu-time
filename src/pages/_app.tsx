@@ -1,3 +1,5 @@
+import '../styles/styles.css'
+
 import { useState, useEffect } from 'react';
 import { AppProps } from 'next/app';
 import LoginPage from './login';

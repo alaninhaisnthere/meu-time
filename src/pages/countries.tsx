@@ -63,7 +63,7 @@ export default function CountriesPage({ isLoggedIn }: { isLoggedIn: boolean }) {
           </div>
         </div>
       ) : (
-        <p>Faça o login para acessar esta página.</p>
+        <p>Faça o login para acessar as informações de países.</p>
       )}
     </div>
   );
