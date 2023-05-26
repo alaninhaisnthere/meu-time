@@ -24,6 +24,8 @@ export default function IndexPage() {
     }
   };
 
+  const isSearchDisabled = !selectedCountry || !selectedSeason || !selectedLeague;
+
   return (
     <>
       <div className="flex flex-col items-center justify-center min-h-screen font-mulish">
@@ -73,7 +75,9 @@ export default function IndexPage() {
           </div>
         </div>
         <Link
-          href={`/results?country=${selectedCountry}&season=${selectedSeason}&league=${selectedLeague}`} className="bg-yellow-400 text-black text-xl font-bold py-2 px-4 rounded mt-4"
+          href={`/results?country=${selectedCountry}&season=${selectedSeason}&league=${selectedLeague}`}
+          className={`bg-yellow-400 text-black text-xl font-bold py-2 px-4 rounded mt-4 ${isSearchDisabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+          disabled={isSearchDisabled}
         >
           Pesquisar
         </Link>
