@@ -9,7 +9,7 @@ export default function IndexPage() {
   const [selectedSeason, setSelectedSeason] = useState('');
   const [selectedLeague, setSelectedLeague] = useState('');
   const [countries, setCountries] = useState<Country[]>([]);
-  const [leagues, setLeagues] = useState<League[]>([]); // Corrigido: utilizar o tipo League[]
+  const [leagues, setLeagues] = useState<League[]>([]);
   const [seasons, setSeasons] = useState<Season[]>([]);
 
   const router = useRouter();
@@ -95,9 +95,9 @@ export default function IndexPage() {
               className="border text-white bg-purple-600 rounded px-4 py-1 w-full h-10 focus:outline-none"
               disabled={!selectedCountry}
             >
-              <option value="">Selecione uma temporada</option> {/* Corrigido: alterar o texto da opção */}
+              <option value="">Selecione uma liga</option>
               {leagues.map((league) => (
-                <option value={league.name} key={league.type}>
+                <option value={league.name} key={league.name}>
                   {league.name}
                 </option>
               ))}

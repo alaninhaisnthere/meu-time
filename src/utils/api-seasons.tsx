@@ -1,19 +1,17 @@
+import axios from 'axios';
+
 export interface Season {
   response: number;
 }
 
 export const fetchSeasons = async (): Promise<Season[]> => {
   try {
-    const response = {
-      data: {
-        response: [
-          2008,
-          2009,
-          2010,
-        ],
-      },
+    const headers = {
+      'x-rapidapi-host': 'v3.football.api-sports.io',
+      'x-rapidapi-key': 'd98cd2a439afddad8db38ccc118dfe88',
     };
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    const response = await axios.get('https://v3.football.api-sports.io/leagues/seasons', { headers });
     const seasons: Season[] = response.data.response.map((year: number) => ({ response: year }));
     return seasons;
   } catch (error) {
