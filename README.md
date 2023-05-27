@@ -12,3 +12,15 @@ npm run dev
 
 ![login](https://github.com/alaninhaisnthere/meu-time/assets/109999387/d0d64329-d2ae-489b-8c12-e33cdf370b60)
 
+- Funções de selecionar País, Temporada e Liga implementadas. Opções de seleção de Liga afuniladas com base no país e temporada escolhidos.
+ 
+![index](https://github.com/alaninhaisnthere/meu-time/assets/109999387/ef31fddf-2e64-4d2f-9863-e9e0ff0bac86)
+
+
+- Header com Logoff funcional
+
+![logoff](https://github.com/alaninhaisnthere/meu-time/assets/109999387/e7fa1bcb-dc43-484c-9efa-9be6b10fac2b)
+
+
+Observações importantes:
+Estatísticas da página de resultados (gráficos de gols por tempo de jogo, formação mais utilizada e lista de jogadores por time) foram mockadas na /utils por conta dos limites diários de requisições da API terem sido atingidos.
