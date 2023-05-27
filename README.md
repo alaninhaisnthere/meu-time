@@ -6,6 +6,7 @@ Link do protótipo: [Abrir no Figma](https://www.figma.com/file/IFxALC6RuvhoQ2Zi
 
 Executar aplicação usando o comando: 
 ```bash
+npm install
 npm run dev
 ```
 - Realizar login com a API Key: d98cd2a439afddad8db38ccc118dfe88
