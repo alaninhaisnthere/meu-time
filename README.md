@@ -9,6 +9,12 @@ Executar aplicação usando o comando:
 npm install
 npm run dev
 ```
+
+![npm1](https://github.com/alaninhaisnthere/meu-time/assets/109999387/401e5641-fe39-4214-a965-e33fe580c993)
+
+![npm2](https://github.com/alaninhaisnthere/meu-time/assets/109999387/d6bb69a4-782b-480f-a9df-62a3f21bb0a6)
+
+
 - Realizar login com a API Key: d98cd2a439afddad8db38ccc118dfe88
 
 ![login](https://github.com/alaninhaisnthere/meu-time/assets/109999387/d0d64329-d2ae-489b-8c12-e33cdf370b60)
