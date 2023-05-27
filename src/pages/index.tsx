@@ -3,7 +3,6 @@ import { SetStateAction, useState, useEffect } from 'react';
 import { fetchCountries, Country } from '../utils/api-countries';
 import { fetchLeaguesByCountryAndSeason, League } from '@/utils/api-leagues';
 import { fetchSeasons, Season } from '@/utils/api-seasons';
-import { fetchTeamsById } from '@/utils/api-teams';
 
 export default function IndexPage() {
   const [selectedCountry, setSelectedCountry] = useState('');
@@ -12,7 +11,6 @@ export default function IndexPage() {
   const [countries, setCountries] = useState<Country[]>([]);
   const [leagues, setLeagues] = useState<League[]>([]);
   const [seasons, setSeasons] = useState<Season[]>([]);
-  const [teams, setTeams] = useState<any[]>([]);
 
   const router = useRouter();
 
@@ -61,29 +59,17 @@ export default function IndexPage() {
 
   const isSearchDisabled = !selectedCountry || !selectedSeason || !selectedLeague;
 
-  const handleSearch = async () => {
+  const handleSearch = () => {
     if (!isSearchDisabled) {
-      const league = leagues.find((league) => league.name === selectedLeague);
-      if (league) {
-        const leagueTeams = league.teams;
-        const teamsData = await Promise.all(
-          leagueTeams.map(async (teamId: number) => {
-            const teamData = await fetchTeamsById(teamId);
-            return teamData;
-          })
-        );
-        setTeams(teamsData);
-      }
-
       router.push(`/results?country=${selectedCountry}&season=${selectedSeason}&league=${selectedLeague}`);
     }
   };
+
   return (
     <>
       <div className="flex flex-col items-center justify-center min-h-screen font-mulish">
         <h1 className="text-6xl font-bold mb-5">Nova Pesquisa</h1>
         <div className="space-y-4">
-
           <div className="flex mb-2 text-2xl font-bold">
             <select
               id="country"
@@ -99,7 +85,6 @@ export default function IndexPage() {
               ))}
             </select>
           </div>
-
           <div className="flex mb-2 text-2xl font-bold">
             <select
               id="season"
@@ -116,7 +101,6 @@ export default function IndexPage() {
               ))}
             </select>
           </div>
-
           <div className="flex mb-4 text-2xl font-bold">
             <select
               id="league"
@@ -134,19 +118,6 @@ export default function IndexPage() {
             </select>
           </div>
         </div>
-
-        {teams.length > 0 && (
-          <div className="mt-8">
-            <h2 className="text-4xl font-bold mb-4">Times</h2>
-            <ul>
-              {teams.map((team) => (
-                <li key={team.team.id}>{team.team.name}</li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-
         {selectedCountry && selectedSeason && selectedLeague ? (
           <button
             onClick={handleSearch}

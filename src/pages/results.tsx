@@ -20,7 +20,7 @@ export default function ResultsPage() {
               <div className="font-bold space-y-4">
                 <p>País: {country}</p>
                 <p>Temporada: {season}</p>
-                <p>liga: {league}</p>
+                <p>Liga: {league}</p>
               </div>
             )}
           </div>

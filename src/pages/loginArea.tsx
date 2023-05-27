@@ -7,7 +7,7 @@ export default function LoginPage({ onLogin }: { onLogin: () => void }) {
   const [apiKey, setApiKey] = useState('');
 
   const handleLogin = () => {
-    if (apiKey === 'hc7fm4u9') {
+    if (apiKey === 'd98cd2a439afddad8db38ccc118dfe88') {
       localStorage.setItem('apiKey', apiKey);
       onLogin();
     } else {
