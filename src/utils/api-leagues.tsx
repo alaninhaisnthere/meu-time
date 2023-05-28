@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 export interface League {
+  id: number
   name: string;
   country: string;
 }
@@ -17,6 +18,7 @@ export const fetchLeaguesByCountryAndSeason = async (country: string, season: st
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
     const leagues: League[] = response.data.response.map((item: any) => ({
+      id: item.league.id,
       name: item.league.name,
       country: item.country.name,
     }));

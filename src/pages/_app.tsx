@@ -13,7 +13,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   useEffect(() => {
     const storedApiKey = localStorage.getItem('apiKey');
-    if (storedApiKey === 'hc7fm4u9') {
+    if (storedApiKey === 'd98cd2a439afddad8db38ccc118dfe88') {
       setIsLoggedIn(true);
     }
   }, []);
