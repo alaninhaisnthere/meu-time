@@ -30,4 +30,6 @@ npm run dev
 
 
 Observações importantes:
-Estatísticas da página de resultados (gráficos de gols por tempo de jogo, formação mais utilizada e lista de jogadores por time) foram mockadas na /utils por conta dos limites diários de requisições da API terem sido atingidos.
+Estatísticas da página de resultados (gráficos de gols por tempo de jogo, formação mais utilizada e lista de jogadores por time) foram mockadas na /utils por conta dos limites diários de requisições da API terem sido atingidos. 
+
+Atualizações fora do prazo de 3 dias estão sendo feitas na refactor-branch.
